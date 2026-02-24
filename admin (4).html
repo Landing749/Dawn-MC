@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Dawn MC - Admin Dashboard</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAPBJREFUeNpi/P//PwMlgImBQsACxL+B+D8UMwHxfyh7KxD/BGIWUjUDDTAD8X8oZoTi/1jYQLoGBmgAE4kGMALxfywYmzqg3Rih8n+R+f+h4j+hbEaKNDND1f4HYiaQZmYsYkxQPiMUMyELYtWMroEJJofTkJ9Ygs1MqPx/JCPgP1TsPxQzIovh1ABVywQVwxnsjFD5/1jk0DVACTAh83G5AJ8GlmEq/x+PyXBqgLkAWS02NVBN2NwArQdT1PkPVYfNBf+xaGZB5mNNRgNUA7o6FmQ+1mQ0QDXgqmcZSFOCSSsABBgAXdU0gKbHzGQAAAAASUVORK5CYII=">
+</head>
+<body style="overflow-y: auto;">
+
+  <!-- Login Section -->
+  <div id="login-section">
+    <div class="login-container">
+      <div class="login-box">
+        <h1 class="login-title">🔐 Admin Login</h1>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email" class="form-label">Email</label>
+            <input 
+              type="email" 
+              id="login-email" 
+              class="form-input" 
+              required
+              placeholder="admin@dawnmc.net"
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="login-password" class="form-label">Password</label>
+            <input 
+              type="password" 
+              id="login-password" 
+              class="form-input" 
+              required
+              placeholder="••••••••"
+            >
+          </div>
+          
+          <p id="login-error" class="form-error hidden"></p>
+          
+          <button type="submit" class="btn-primary">
+            Sign In
+          </button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 1.5rem; color: rgba(255, 255, 255, 0.5); font-size: 0.875rem;">
+          <a href="index.html" style="color: var(--gold-text); text-decoration: none;">← Back to Website</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Section -->
+  <div id="dashboard-section" class="hidden">
+    <div class="admin-container">
+      <!-- Header -->
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">⚡ Dawn MC Admin Dashboard</h1>
+          <p style="color: rgba(255, 255, 255, 0.6); margin-top: 0.5rem;">
+            Welcome back, <span id="user-email"></span>
+          </p>
+        </div>
+        
+        <div class="admin-user-info">
+          <a href="index.html" target="_blank" class="admin-btn">View Website</a>
+          <button id="logout-btn" class="admin-btn">Logout</button>
+        </div>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="announcements">📢 Announcements</button>
+        <button class="tab-btn" data-tab="events">📅 Events</button>
+        <button class="tab-btn" data-tab="store">🛒 Store</button>
+        <button class="tab-btn" data-tab="staff">👥 Staff</button>
+        <button class="tab-btn" data-tab="ranks">⭐ Ranks</button>
+      </div>
+
+      <!-- Announcements Panel -->
+      <div id="announcements-panel" class="tab-panel">
+        <div class="panel-header">
+          <h2 class="panel-title" id="announcement-form-title">Add Announcement</h2>
+        </div>
+
+        <form id="announcement-form" class="admin-form">
+          <input type="hidden" id="announcement-id">
+          
+          <div class="form-group">
+            <label for="announcement-title" class="form-label">Title *</label>
+            <input 
+              type="text" 
+              id="announcement-title" 
+              class="form-input" 
+              required
+              placeholder="Season 3 Launch"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="announcement-description" class="form-label">Description *</label>
+            <textarea 
+              id="announcement-description" 
+              class="form-textarea" 
+              required
+              placeholder="Get ready for the most competitive season yet..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="announcement-date" class="form-label">Date *</label>
+            <input 
+              type="date" 
+              id="announcement-date" 
+              class="form-input" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <div class="form-checkbox-group">
+              <input 
+                type="checkbox" 
+                id="announcement-new" 
+                class="form-checkbox"
+              >
+              <label for="announcement-new" class="form-label" style="margin-bottom: 0;">
+                Mark as NEW
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Image (optional)</label>
+            <div id="announcement-image-upload"></div>
+            <input type="hidden" id="announcement-image-url">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-reset" data-form="announcement">Reset</button>
+            <button type="submit" class="btn-primary">Save Announcement</button>
+          </div>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid rgba(255, 140, 50, 0.1); margin: 2rem 0;">
+
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+          Existing Announcements
+        </h3>
+        <div id="announcements-list" class="data-list"></div>
+      </div>
+
+      <!-- Events Panel -->
+      <div id="events-panel" class="tab-panel hidden">
+        <div class="panel-header">
+          <h2 class="panel-title" id="event-form-title">Add Event</h2>
+        </div>
+
+        <form id="event-form" class="admin-form">
+          <input type="hidden" id="event-id">
+          
+          <div class="form-group">
+            <label for="event-name" class="form-label">Event Name *</label>
+            <input 
+              type="text" 
+              id="event-name" 
+              class="form-input" 
+              required
+              placeholder="SEASON 3 LAUNCH EVENT"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="event-description" class="form-label">Description</label>
+            <textarea 
+              id="event-description" 
+              class="form-textarea"
+              placeholder="Join us for the biggest season launch yet..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="event-timestamp" class="form-label">Event Date & Time *</label>
+            <input 
+              type="datetime-local" 
+              id="event-timestamp" 
+              class="form-input" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="event-status" class="form-label">Status *</label>
+            <select id="event-status" class="form-select" required>
+              <option value="upcoming">Upcoming</option>
+              <option value="live">Live</option>
+              <option value="ended">Ended</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-reset" data-form="event">Reset</button>
+            <button type="submit" class="btn-primary">Save Event</button>
+          </div>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid rgba(255, 140, 50, 0.1); margin: 2rem 0;">
+
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+          Existing Events
+        </h3>
+        <div id="events-list" class="data-list"></div>
+      </div>
+
+      <!-- Store Panel -->
+      <div id="store-panel" class="tab-panel hidden">
+        <div class="panel-header">
+          <h2 class="panel-title" id="store-form-title">Add Store Item</h2>
+        </div>
+
+        <form id="store-form" class="admin-form">
+          <input type="hidden" id="store-id">
+          
+          <div class="form-group">
+            <label for="store-name" class="form-label">Item Name *</label>
+            <input 
+              type="text" 
+              id="store-name" 
+              class="form-input" 
+              required
+              placeholder="VIP Rank"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="store-price" class="form-label">Price *</label>
+            <input 
+              type="text" 
+              id="store-price" 
+              class="form-input" 
+              required
+              placeholder="$9.99"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="store-description" class="form-label">Description</label>
+            <textarea 
+              id="store-description" 
+              class="form-textarea"
+              placeholder="Access exclusive perks and features..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="store-category" class="form-label">Category</label>
+            <select id="store-category" class="form-select">
+              <option value="">Select category</option>
+              <option value="Ranks">Ranks</option>
+              <option value="Cosmetics">Cosmetics</option>
+              <option value="Crates">Crates</option>
+              <option value="Effects">Effects</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="store-purchase-link" class="form-label">Purchase Link (optional)</label>
+            <input 
+              type="url" 
+              id="store-purchase-link" 
+              class="form-input"
+              placeholder="https://store.dawnmc.net/item"
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Image (optional)</label>
+            <div id="store-image-upload"></div>
+            <input type="hidden" id="store-image-url">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-reset" data-form="store">Reset</button>
+            <button type="submit" class="btn-primary">Save Store Item</button>
+          </div>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid rgba(255, 140, 50, 0.1); margin: 2rem 0;">
+
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+          Existing Store Items
+        </h3>
+        <div id="store-list" class="data-list"></div>
+      </div>
+
+      <!-- Staff Panel -->
+      <div id="staff-panel" class="tab-panel hidden">
+        <div class="panel-header">
+          <h2 class="panel-title" id="staff-form-title">Add Staff Member</h2>
+        </div>
+
+        <form id="staff-form" class="admin-form">
+          <input type="hidden" id="staff-id">
+          
+          <div class="form-group">
+            <label for="staff-name" class="form-label">Name *</label>
+            <input 
+              type="text" 
+              id="staff-name" 
+              class="form-input" 
+              required
+              placeholder="Steve_MC"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="staff-role" class="form-label">Role *</label>
+            <input 
+              type="text" 
+              id="staff-role" 
+              class="form-input" 
+              required
+              placeholder="Server Owner"
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Avatar (optional)</label>
+            <div id="staff-avatar-upload"></div>
+            <input type="hidden" id="staff-avatar-url">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-reset" data-form="staff">Reset</button>
+            <button type="submit" class="btn-primary">Save Staff Member</button>
+          </div>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid rgba(255, 140, 50, 0.1); margin: 2rem 0;">
+
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+          Existing Staff Members
+        </h3>
+        <div id="staff-list" class="data-list"></div>
+      </div>
+
+      <!-- Ranks Panel -->
+      <div id="ranks-panel" class="tab-panel hidden">
+        <div class="panel-header">
+          <h2 class="panel-title" id="rank-form-title">Add Rank</h2>
+        </div>
+
+        <form id="rank-form" class="admin-form">
+          <input type="hidden" id="rank-id">
+          
+          <div class="form-group">
+            <label for="rank-name" class="form-label">Rank Name *</label>
+            <input 
+              type="text" 
+              id="rank-name" 
+              class="form-input" 
+              required
+              placeholder="VIP"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="rank-price" class="form-label">Price *</label>
+            <input 
+              type="text" 
+              id="rank-price" 
+              class="form-input" 
+              required
+              placeholder="$9.99"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="rank-permissions" class="form-label">Permissions Description</label>
+            <textarea 
+              id="rank-permissions" 
+              class="form-textarea"
+              placeholder="Access to VIP lounge, custom prefix, priority join..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="rank-order" class="form-label">Display Order</label>
+            <input 
+              type="number" 
+              id="rank-order" 
+              class="form-input"
+              value="0"
+              min="0"
+              placeholder="0"
+            >
+            <p style="color: rgba(255, 255, 255, 0.5); font-size: 0.875rem; margin-top: 0.5rem;">
+              Lower numbers appear first
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Image (optional)</label>
+            <div id="rank-image-upload"></div>
+            <input type="hidden" id="rank-image-url">
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-reset" data-form="rank">Reset</button>
+            <button type="submit" class="btn-primary">Save Rank</button>
+          </div>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid rgba(255, 140, 50, 0.1); margin: 2rem 0;">
+
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 1rem;">
+          Existing Ranks
+        </h3>
+        <div id="ranks-list" class="data-list"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <!-- Application Scripts -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/security.js"></script>
+  <script src="js/cloudinary.js"></script>
+  <script src="js/admin.js"></script>
+
+  <script>
+    // Initialize Cloudinary uploaders after page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const uploader = new CloudinaryUploader();
+      
+      // Announcement image uploader
+      uploader.createUploadWidget('announcement-image-upload', {
+        onSuccess: (url) => {
+          document.getElementById('announcement-image-url').value = url;
+          console.log('Announcement image uploaded:', url);
+        },
+        onRemove: () => {
+          document.getElementById('announcement-image-url').value = '';
+        }
+      });
+
+      // Store image uploader
+      uploader.createUploadWidget('store-image-upload', {
+        onSuccess: (url) => {
+          document.getElementById('store-image-url').value = url;
+          console.log('Store image uploaded:', url);
+        },
+        onRemove: () => {
+          document.getElementById('store-image-url').value = '';
+        }
+      });
+
+      // Staff avatar uploader
+      uploader.createUploadWidget('staff-avatar-upload', {
+        onSuccess: (url) => {
+          document.getElementById('staff-avatar-url').value = url;
+          console.log('Staff avatar uploaded:', url);
+        },
+        onRemove: () => {
+          document.getElementById('staff-avatar-url').value = '';
+        }
+      });
+
+      // Rank image uploader
+      uploader.createUploadWidget('rank-image-upload', {
+        onSuccess: (url) => {
+          document.getElementById('rank-image-url').value = url;
+          console.log('Rank image uploaded:', url);
+        },
+        onRemove: () => {
+          document.getElementById('rank-image-url').value = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
